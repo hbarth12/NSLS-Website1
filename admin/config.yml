@@ -1,0 +1,48 @@
+backend:
+  name: github
+  repo: YOUR-GITHUB-USERNAME/YOUR-REPO-NAME
+  branch: main
+
+# Allows `npx decap-server` local editing later, if you want it.
+local_backend: true
+
+media_folder: "assets/uploads"
+public_folder: "assets/uploads"
+
+collections:
+  - name: "site_data"
+    label: "Site Data"
+    files:
+      - name: "publications"
+        label: "Publications"
+        file: "content/publications.json"
+        format: "json"
+        fields:
+          - label: "Publications"
+            name: "publications"
+            widget: "list"
+            summary: "{{fields.title}}"
+            label_singular: "Publication"
+            fields:
+              - { label: "Featured", name: "featured", widget: "boolean", required: false, default: false }
+              - label: "Type"
+                name: "type"
+                widget: "select"
+                options:
+                  - { label: "Analysis", value: "analysis" }
+                  - { label: "Policy Paper", value: "policy-paper" }
+                  - { label: "Institutional Note", value: "institutional-note" }
+              - label: "Display Label"
+                name: "label"
+                widget: "select"
+                options: ["Analysis", "Policy Paper", "Institutional Note"]
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Description", name: "description", widget: "text" }
+              - { label: "Source", name: "source", widget: "string", default: "NSLS" }
+              - { label: "Date", name: "date", widget: "string", hint: "Example: May 21, 2026" }
+              - { label: "Topics", name: "topics", widget: "list", field: { label: "Topic", name: "topic", widget: "string" }, required: false }
+              - { label: "Image", name: "image", widget: "image", required: false, hint: "Upload an image or paste an external image URL." }
+              - { label: "Image Alt Text", name: "imageAlt", widget: "string", required: false }
+              - { label: "Fallback Mark", name: "mark", widget: "string", required: false, hint: "Used when no image is set, e.g. NSLS." }
+              - { label: "URL", name: "url", widget: "string" }
+              - { label: "External Link", name: "external", widget: "boolean", required: false, default: false }
